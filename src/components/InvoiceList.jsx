@@ -14,10 +14,10 @@ export default function InvoiceList({ invoices, onSelect, selectedId }) {
             const total = subtotal + tax
             return (
               <li key={inv.id} className={inv.id === selectedId ? 'selected' : ''} onClick={() => onSelect(inv.id)}>
-                <div><strong>{inv.number}</strong></div>
-                <div>{inv.client}</div>
-                <div>{inv.date}</div>
-                <div>Total: ${total.toFixed(2)}</div>
+                  <div><strong>{inv.number}</strong></div>
+                  <div>{inv.client}</div>
+                  <div>{new Date(inv.date).toLocaleDateString()}</div>
+                  <div>Total: {total.toLocaleString(undefined, { style: 'currency', currency: 'USD' })}</div>
               </li>
             )
           })}

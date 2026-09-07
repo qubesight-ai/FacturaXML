@@ -20,7 +20,7 @@ export default function Invoice({ invoice }) {
         <div className="meta">
           <div><strong>Factura:</strong> {invoice.number}</div>
           <div><strong>Cliente:</strong> {invoice.client}</div>
-          <div><strong>Fecha:</strong> {invoice.date}</div>
+          <div><strong>Fecha:</strong> {new Date(invoice.date).toLocaleDateString()}</div>
         </div>
       </header>
 

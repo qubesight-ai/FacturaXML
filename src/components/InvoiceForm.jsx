@@ -8,7 +8,8 @@ export default function InvoiceForm({ onAddInvoice }) {
   const [number, setNumber] = useState('')
   const [client, setClient] = useState('')
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
-  const [taxRate, setTaxRate] = useState(0.12)
+  // store taxRate as percentage in the form (12 means 12%) and convert on submit
+  const [taxRate, setTaxRate] = useState(12)
   const [items, setItems] = useState([emptyItem()])
   const [errors, setErrors] = useState({})
 
@@ -28,8 +29,20 @@ export default function InvoiceForm({ onAddInvoice }) {
     const e = {}
     if (!number.trim()) e.number = 'Número requerido'
     if (!client.trim()) e.client = 'Cliente requerido'
-    const validItems = items.filter(it => it.description.trim() && Number(it.qty) > 0 && Number(it.price) >= 0)
-    if (validItems.length === 0) e.items = 'Agregar al menos un ítem válido'
+
+    const itemsErrors = {}
+    let validCount = 0
+    items.forEach((it, idx) => {
+      const rowErrors = []
+      if (!it.description || !it.description.trim()) rowErrors.push('Descripción requerida')
+      if (!Number.isFinite(Number(it.qty)) || Number(it.qty) <= 0) rowErrors.push('Cantidad debe ser > 0')
+      if (!Number.isFinite(Number(it.price)) || Number(it.price) < 0) rowErrors.push('Precio inválido')
+      if (rowErrors.length) itemsErrors[idx] = rowErrors.join(', ')
+      else validCount++
+    })
+    if (validCount === 0) e.items = 'Agregar al menos un ítem válido'
+    if (Object.keys(itemsErrors).length) e.itemsMap = itemsErrors
+
     setErrors(e)
     return Object.keys(e).length === 0
   }
@@ -42,7 +55,8 @@ export default function InvoiceForm({ onAddInvoice }) {
       number,
       client,
       date,
-      taxRate: Number(taxRate),
+      // convert percentage to decimal (e.g., 12 -> 0.12)
+      taxRate: Number(taxRate) / 100,
       items: items.map(it => ({ description: it.description, qty: Number(it.qty), price: Number(it.price) }))
     }
     onAddInvoice(inv)
@@ -73,7 +87,7 @@ export default function InvoiceForm({ onAddInvoice }) {
         <input type="date" value={date} onChange={e => setDate(e.target.value)} />
       </div>
       <div className="field-row">
-        <label>Impuesto (ej. IVA) %</label>
+        <label>Impuesto (IVA) %</label>
         <input type="number" step="0.01" value={taxRate} onChange={e => setTaxRate(e.target.value)} />
       </div>
 
@@ -84,6 +98,7 @@ export default function InvoiceForm({ onAddInvoice }) {
           <input type="number" min="0" placeholder="Cantidad" value={it.qty} onChange={e => handleItemChange(idx, 'qty', e.target.value)} />
           <input type="number" step="0.01" min="0" placeholder="Precio" value={it.price} onChange={e => handleItemChange(idx, 'price', e.target.value)} />
           <button type="button" className="remove" onClick={() => removeItem(idx)}>Eliminar</button>
+          {errors.itemsMap && errors.itemsMap[idx] && <small className="error item-error">{errors.itemsMap[idx]}</small>}
         </div>
       ))}
       {errors.items && <small className="error">{errors.items}</small>}

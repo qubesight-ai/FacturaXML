@@ -1,0 +1,12 @@
+{
+  "id": 1694040000000,
+  "number": "F-001",
+  "client": "Juan Pérez",
+  "date": "2026-09-07",
+  "taxRate": 0.12,
+  "items": [
+    { "description": "Teclado", "qty": 2, "price": 25 },
+    { "description": "Monitor", "qty": 1, "price": 180 },
+    { "description": "Mouse", "qty": 3, "price": 12 }
+  ]
+}

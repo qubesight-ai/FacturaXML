@@ -28,3 +28,10 @@ Uso:
 - Crear facturas desde el formulario (agregar/eliminar ítems).
 - En la columna derecha se listan las facturas y se puede seleccionar una para ver su diseño.
 - Para reproducir el ejemplo solicitado, usar el botón "Cargar factura de ejemplo".
+ - Para reproducir el ejemplo solicitado, usar el botón "Cargar factura de ejemplo".
+
+Evidencia
+
+- Se incluye `evidence/example-invoice.json` con los datos de ejemplo solicitados.
+- Para mostrar la factura de ejemplo en la app: ejecutar la app, pulsar "Cargar factura de ejemplo" y seleccionar la factura en el listado. Luego tomar una captura que muestre el diseño completo.
+
