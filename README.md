@@ -35,8 +35,17 @@ Evidencia
 - Se incluye `evidence/example-invoice.json` con los datos de ejemplo solicitados.
 - Para mostrar la factura de ejemplo en la app: ejecutar la app, pulsar "Cargar factura de ejemplo" y seleccionar la factura en el listado. Luego tomar una captura que muestre el diseño completo.
 
+
 Exportar / Imprimir
 
 - Desde la vista de la factura hay dos botones: `Descargar HTML` (genera un archivo .html con el diseño) y `Imprimir (PDF)` (abre la vista imprimible; usar "Guardar como PDF" en el diálogo de impresión).
+
+
+Repositorio y entrega
+
+- Repositorio en GitHub: https://github.com/qubesight-ai/FacturaXML
+- ZIP entregable incluido en el repo: [FacturaXML-deliverable.zip](./FacturaXML-deliverable.zip)
+
+Nota: también existe `../FacturaXML.zip` si se generó en la carpeta superior localmente.
 
 
