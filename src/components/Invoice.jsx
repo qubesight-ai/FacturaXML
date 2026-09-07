@@ -11,6 +11,29 @@ export default function Invoice({ invoice }) {
 
   return (
     <div className="invoice">
+      <div className="invoice-actions" style={{display:'flex',gap:8,justifyContent:'flex-end',marginBottom:8}}>
+        <button onClick={() => {
+          const html = document.getElementById('invoice-html')?.outerHTML || document.querySelector('.invoice')?.outerHTML
+          const blob = new Blob([`<html><head><meta charset="utf-8"><title>Factura-${invoice.number}</title></head><body>${html}</body></html>`], { type: 'text/html' })
+          const url = URL.createObjectURL(blob)
+          const a = document.createElement('a')
+          a.href = url
+          a.download = `Factura-${invoice.number}.html`
+          document.body.appendChild(a)
+          a.click()
+          a.remove()
+          URL.revokeObjectURL(url)
+        }}>Descargar HTML</button>
+        <button onClick={() => {
+          const content = document.querySelector('.invoice')?.outerHTML
+          const w = window.open('', '_blank')
+          if (!w) return
+          w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Factura ${invoice.number}</title><style>body{font-family:Arial, Helvetica, sans-serif;padding:20px}</style></head><body>${content}</body></html>`)
+          w.document.close()
+          w.focus()
+          setTimeout(() => w.print(), 300)
+        }}>Imprimir (PDF)</button>
+      </div>
       <header className="inv-header">
         <div className="issuer">
           <h3>TechStore S.A.</h3>
@@ -24,7 +47,7 @@ export default function Invoice({ invoice }) {
         </div>
       </header>
 
-      <table className="items">
+      <table className="items" id="invoice-html">
         <thead>
           <tr>
             <th>Descripción</th>
