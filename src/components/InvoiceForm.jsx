@@ -4,10 +4,29 @@ function emptyItem() {
   return { description: '', qty: 1, price: 0 }
 }
 
+function detectInvoiceCategory(items = []) {
+  const text = (items || []).map(item => `${item.description || ''} ${item.category || ''}`).join(' ').toLowerCase()
+
+  if (/(servicio|soporte|consult|desarrollo|mantenimiento|hosting|software|licencia|analisis)/i.test(text)) {
+    return 'Servicios'
+  }
+
+  if (/(producto|equipo|monitor|teclado|mouse|laptop|impresora|cable|hardware|tablet)/i.test(text)) {
+    return 'Productos'
+  }
+
+  if (/(alquiler|gasto|internet|agua|luz|transporte|publicidad|marketing|mobiliario)/i.test(text)) {
+    return 'Gastos'
+  }
+
+  return 'General'
+}
+
 export default function InvoiceForm({ onAddInvoice }) {
   const [number, setNumber] = useState('')
   const [client, setClient] = useState('')
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
+  const [category, setCategory] = useState('Automático')
   // store taxRate as percentage in the form (12 means 12%) and convert on submit
   const [taxRate, setTaxRate] = useState(12)
   const [items, setItems] = useState([emptyItem()])
@@ -50,11 +69,13 @@ export default function InvoiceForm({ onAddInvoice }) {
   function handleSubmit(ev) {
     ev.preventDefault()
     if (!validate()) return
+    const resolvedCategory = category === 'Automático' ? detectInvoiceCategory(items) : category
     const inv = {
       id: Date.now(),
       number,
       client,
       date,
+      category: resolvedCategory,
       // convert percentage to decimal (e.g., 12 -> 0.12)
       taxRate: Number(taxRate) / 100,
       items: items.map(it => ({ description: it.description, qty: Number(it.qty), price: Number(it.price) }))
@@ -64,7 +85,8 @@ export default function InvoiceForm({ onAddInvoice }) {
     setNumber('')
     setClient('')
     setDate(new Date().toISOString().slice(0, 10))
-    setTaxRate(0.12)
+    setCategory('Automático')
+    setTaxRate(12)
     setItems([emptyItem()])
     setErrors({})
   }
@@ -85,6 +107,16 @@ export default function InvoiceForm({ onAddInvoice }) {
       <div className="field-row">
         <label>Fecha</label>
         <input type="date" value={date} onChange={e => setDate(e.target.value)} />
+      </div>
+      <div className="field-row">
+        <label>Clasificación</label>
+        <select value={category} onChange={e => setCategory(e.target.value)}>
+          <option value="Automático">Automático</option>
+          <option value="Productos">Productos</option>
+          <option value="Servicios">Servicios</option>
+          <option value="Gastos">Gastos</option>
+          <option value="General">General</option>
+        </select>
       </div>
       <div className="field-row">
         <label>Impuesto (IVA) %</label>

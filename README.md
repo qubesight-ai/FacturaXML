@@ -1,4 +1,14 @@
-# Sistema de Manipulación de Facturas (React)
+# Automatización de facturas en React
+
+## Reto empresarial
+
+Barry recibe muchas facturas y necesita reducir el tiempo que dedica a organizarlas.
+
+Reto: desarrollar en React una aplicación que permita cargar facturas y automatice su clasificación, registro, búsqueda y generación de un resumen de la información.
+
+Cargar factura → validar → clasificar → registrar en API → mostrar dashboard
+
+1 hora para su realización
 
 Proyecto frontend en React (Vite) que permite crear, listar y visualizar facturas.
 
@@ -7,6 +17,9 @@ Requisitos cumplidos:
 - Listado de facturas con `.map()` y `key`, selección y manejo de estado vacío.
 - Componente `Invoice` que recibe props y calcula subtotal/impuesto/total.
 - Botón para cargar una factura de ejemplo (ver evidencia).
+- Automatización con estados `inactivo`, `ejecutando`, `exito` y `error`.
+- `useEffect` con `setTimeout` y limpieza mediante `clearTimeout`.
+- Diagrama visible del workflow en el dashboard.
 
 Cómo ejecutar:
 
@@ -28,7 +41,13 @@ Uso:
 - Crear facturas desde el formulario (agregar/eliminar ítems).
 - En la columna derecha se listan las facturas y se puede seleccionar una para ver su diseño.
 - Para reproducir el ejemplo solicitado, usar el botón "Cargar factura de ejemplo".
- - Para reproducir el ejemplo solicitado, usar el botón "Cargar factura de ejemplo".
+- Al enviar una factura, observar el panel "Registro automático de facturas": muestra el trigger, el procesamiento, la decisión de la API y el resultado.
+- Para comprobar la ruta de error, detener el servidor API antes de enviar una factura. La interfaz debe mostrar el estado `Error` y un mensaje de recuperación.
+
+## Entregables del laboratorio
+
+- [Informe del laboratorio](./docs/informe-automatizacion.md)
+- [Diagrama de workflow en Mermaid](./docs/workflow.md)
 
 Evidencia
 

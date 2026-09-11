@@ -6,24 +6,48 @@
 }
 *{box-sizing:border-box}
 body{font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);margin:0;color:#222}
-.app-container{max-width:1100px;margin:24px auto;padding:16px}
+.app-container{max-width:1100px;margin:24px auto;padding:16px;padding-top:88px}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(15,23,42,0.95);border-bottom:1px solid rgba(148,163,184,0.35);padding:12px 24px;box-shadow:0 6px 20px rgba(15,23,42,0.15)}
+.brand{font-size:1.1rem;font-weight:800;color:#f8fafc;letter-spacing:0.04em}
+.main-nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;color:#e2e8f0;text-decoration:none;font-weight:700;transition:all 0.2s ease;border:1px solid transparent}
+.nav-btn:hover,.nav-btn.active{background:#38bdf8;color:#0f172a;transform:translateY(-1px)}
+.nav-primary{background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;box-shadow:0 8px 18px rgba(37,99,235,0.35)}
+.nav-primary:hover,.nav-primary.active{background:linear-gradient(135deg,#38bdf8,#1d4ed8);color:#fff}
+.nav-flow{background:linear-gradient(135deg,#16a34a,#15803d);border-color:rgba(134,239,172,0.4);box-shadow:0 6px 16px rgba(22,163,74,0.18)}
+.nav-flow:hover,.nav-flow.active{background:linear-gradient(135deg,#22c55e,#166534);color:#fff}
 header h1{margin:0 0 12px}
+.challenge-banner{background:linear-gradient(135deg,#ebf8ff,#f0fdf4);border:1px solid #bae6fd;border-left:6px solid #2563eb;border-radius:10px;padding:16px;margin-bottom:18px}
+.challenge-label{display:inline-block;background:#2563eb;color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px}
+.challenge-banner p{margin:0 0 8px;line-height:1.5}
+.challenge-flow{font-weight:600;color:#0f172a}
+.challenge-time{font-weight:700;color:#14532d}
+.dashboard-panel{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.06);margin-bottom:18px}
+.dashboard-tools{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}
+.dashboard-tools input,.dashboard-tools select,.field-row input,.field-row select{padding:8px;border:1px solid #ddd;border-radius:4px}
+.dashboard-tools input{flex:1;min-width:180px}
+.dashboard-tools select{min-width:180px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:12px}
+.stat-card{background:linear-gradient(135deg,#f8fafc,#eef2ff);border:1px solid #dbeafe;padding:14px;border-radius:10px}
+.stat-label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}
+.stat-card strong{font-size:1.15rem;color:#111827}
 main{display:flex;gap:16px}
 .left{width:360px}
 .right{flex:1}
 .invoice-form, .invoice-list, .viewer{background:var(--card);padding:12px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
 .field-row{display:flex;flex-direction:column;margin-bottom:8px}
 .field-row label{font-size:12px;color:var(--muted);margin-bottom:4px}
-input{padding:8px;border:1px solid #ddd;border-radius:4px}
-.item-row{display:flex;gap:6px;margin-bottom:6px}
-.item-row input{flex:1}
+.item-row{display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap}
+.item-row input{flex:1;min-width:90px}
 .item-row .remove{background:#e53e3e;color:#fff;border:none;padding:6px 8px;border-radius:4px}
 .actions{display:flex;gap:8px}
 button{background:var(--accent);color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer}
 .example-btn{margin-top:8px;background:#38a169}
 .invoice-list ul{list-style:none;padding:0;margin:0}
-.invoice-list li{display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.invoice-list li{padding:10px;border-bottom:1px solid #f0f0f0;cursor:pointer}
 .invoice-list li.selected{background:#eef6ff}
+.invoice-summary{display:flex;flex-direction:column;gap:4px}
+.invoice-tag{display:inline-block;width:max-content;background:#dbeafe;color:#1d4ed8;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}
 .invoice{padding:12px}
 .inv-header{display:flex;justify-content:space-between;margin-bottom:12px}
 .items{width:100%;border-collapse:collapse;margin-bottom:12px}
@@ -32,3 +56,51 @@ button{background:var(--accent);color:#fff;border:none;padding:8px 10px;border-r
 .totals div{display:flex;justify-content:space-between;padding:6px 0}
 .total{font-weight:700;border-top:1px solid #ddd;padding-top:8px;margin-top:8px}
 .error{color:#b91c1c}
+.workflow-panel{background:#101827;color:#e5eef7;padding:18px;border-radius:10px;margin-bottom:18px;box-shadow:0 8px 24px rgba(15,23,42,0.14)}
+.workflow-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:18px}
+.workflow-heading h2{margin:4px 0 0;font-size:1.1rem}
+.eyebrow{color:#67e8f9;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.workflow-status{padding:6px 10px;border-radius:999px;background:#334155;font-size:12px;white-space:nowrap}
+.workflow-ejecutando .workflow-status{background:#a16207;color:#fff7ed}
+.workflow-exito .workflow-status{background:#15803d;color:#f0fdf4}
+.workflow-error .workflow-status{background:#b91c1c;color:#fff1f2}
+.workflow-track{display:flex;align-items:center;gap:8px;position:relative;min-height:92px}
+.workflow-node,.workflow-decision{display:flex;align-items:center;justify-content:center;text-align:center;min-height:62px;padding:10px;border:1px solid #475569;border-radius:8px;background:#1e293b;font-weight:800;font-size:13px;flex:1}
+.workflow-node small{font-weight:500;color:#cbd5e1;font-size:11px}
+.start-node{max-width:82px;background:#164e63;border-color:#22d3ee}
+.trigger-node{border-color:#38bdf8}
+.process-node{border-color:#fbbf24}
+.workflow-decision{max-width:100px;transform:rotate(45deg);border-color:#fbbf24;background:#713f12;font-size:11px}
+.workflow-arrow{color:#94a3b8;font-size:20px;font-weight:800}
+.workflow-branches{display:flex;flex-direction:column;gap:6px;min-width:190px;font-size:11px}
+.workflow-branch{padding:8px;border-radius:6px}
+.success-branch{background:#14532d;color:#bbf7d0}
+.error-branch{background:#7f1d1d;color:#fecaca}
+.workflow-message{margin:16px 0 0;color:#cbd5e1;font-size:13px}
+@media (max-width:760px){.workflow-track{align-items:stretch;flex-direction:column}.workflow-arrow{transform:rotate(90deg);align-self:center}.workflow-node,.workflow-decision{max-width:none;width:100%;transform:none}.workflow-branches{width:100%}}
+.automation-page{min-height:100vh;background:linear-gradient(145deg,#eff6ff 0%,#f8fafc 48%,#ecfdf5 100%);padding-top:88px}
+.automation-content{max-width:1100px;margin:0 auto;padding:34px 16px 48px}
+.automation-intro{max-width:720px;margin-bottom:22px}
+.automation-intro h1{margin:5px 0 10px;color:#0f172a;font-size:clamp(1.8rem,4vw,3rem);line-height:1.05}
+.automation-intro p{margin:0;color:#475569;font-size:1.05rem;line-height:1.6}
+.dark-eyebrow{color:#0369a1}
+.automation-controls,.instructions-panel{background:#fff;border:1px solid #dbeafe;border-radius:10px;padding:22px;margin-bottom:18px;box-shadow:0 4px 16px rgba(15,23,42,.06)}
+.automation-controls h2,.instructions-panel h2{margin:4px 0 8px;color:#0f172a}
+.automation-controls p{margin:0;color:#64748b;line-height:1.5}
+.automation-controls{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:18px}
+.error-toggle{display:flex;align-items:center;gap:8px;color:#334155;font-size:13px;white-space:nowrap}
+.error-toggle input{accent-color:#dc2626}
+.run-automation{background:#0369a1;padding:12px 16px;font-weight:800}
+.run-automation:disabled{background:#94a3b8;cursor:not-allowed}
+.instructions-panel ol{margin:14px 0 0;padding-left:22px;color:#334155;line-height:1.8}
+@media (max-width:760px){.automation-controls{grid-template-columns:1fr}.error-toggle{white-space:normal}.run-automation{width:100%}}
+
+.demo-page{max-width:800px;margin:40px auto;padding:20px}
+.demo-header{margin-bottom:20px}
+.top-nav{display:flex;gap:16px;margin-bottom:12px}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:600}
+.demo-card{background:var(--card);padding:20px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+.demo-content{margin-top:16px}
+.demo-success{color:#15803d;font-weight:600}
+.demo-muted{color:var(--muted)}
+.demo-badge{margin-top:12px;padding:12px;background:#e0f2fe;border:1px solid #bae6fd;border-radius:6px;color:#0f172a}
